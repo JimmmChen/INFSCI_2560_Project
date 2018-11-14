@@ -2,7 +2,7 @@
     <div>
       <nav-header></nav-header>
       <nav-bread>
-        <span>Goods</span>
+        <span>Books</span>
       </nav-bread>
       <div class="accessory-result-page accessory-page">
         <div class="container">
@@ -43,7 +43,7 @@
                 </ul>
                 <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading" spinner="bubbles">
                   <span slot="no-more">
-                    No more goods :)
+                    No more books :)
                   </span>
                 </infinite-loading>
               </div>
