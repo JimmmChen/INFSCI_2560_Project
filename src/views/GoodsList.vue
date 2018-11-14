@@ -33,8 +33,8 @@
                       <a href="#"><img v-lazy="'/static/' + item.productImage" alt=""></a>
                     </div>
                     <div class="main">
-                      <div class="name">{{item.productName}}</div>
-                      <div class="price">¥ {{item.salePrice}}</div>
+                      <div class="name"><a href="#" :title=item.productName>{{item.productName}}</a></div>
+                      <div class="price">$ {{item.salePrice}}</div>
                       <div class="btn-area">
                         <a href="javascript:;" class="btn btn--m" @click="addCart(item.productId)">Add to Cart</a>
                       </div>

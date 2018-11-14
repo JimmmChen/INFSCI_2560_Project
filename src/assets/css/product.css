@@ -57,7 +57,7 @@
   display: block;
   width: 100%;
   height: 0;
-  padding-bottom: 100%;
+  padding-bottom: 150%;
 }
 
 .accessory-list .pic img {
@@ -65,16 +65,18 @@
 }
 
 .accessory-list .main {
-  padding: 20px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
 }
 
 .accessory-list .main .name {
-  height: 4em;
+  height: 1.5em;
   line-height: 1.25em;
   padding-bottom: 10px;
   font-family: "moderat", sans-serif;
   font-weight: bold;
   overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
 
 .accessory-list .main .price {
@@ -165,13 +167,6 @@
     width: 110px;
     height: 110px;
     border: 1px solid #e9e9e9;
-  }
-
-  .accessory-list .pic a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding-bottom: 0;
   }
 
   .accessory-list .main {
@@ -408,7 +403,7 @@
 .filter-nav {
   height: 55px;
   line-height: 55px;
-  margin: 60px 0 30px 0;
+  margin: 10px 0 30px 0;
   padding: 0 20px;
   background: #fff;
   text-align: right;

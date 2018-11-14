@@ -41,7 +41,7 @@
                   </div>
                 </div>
                 <div class="cart-tab-2">
-                  <div class="item-price">{{item.salePrice | currency('¥')}}</div>
+                  <div class="item-price">{{item.salePrice | currency('$')}}</div>
                 </div>
                 <div class="cart-tab-3">
                   <div class="item-quantity">
@@ -54,7 +54,7 @@
                   </div>
                 </div>
                 <div class="cart-tab-4">
-                  <div class="item-price-total">{{item.salePrice * item.productNum | currency('¥')}}</div>
+                  <div class="item-price-total">{{item.salePrice * item.productNum | currency('$')}}</div>
                 </div>
               </li>
             </ul>
@@ -67,23 +67,23 @@
             <ul>
               <li>
                 <span>Item subtotal:</span>
-                <span>{{subTotal | currency('¥')}}</span>
+                <span>{{subTotal | currency('$')}}</span>
               </li>
               <li>
                 <span>Shipping:</span>
-                <span>{{shipping | currency('¥')}}</span>
+                <span>{{shipping | currency('$')}}</span>
               </li>
               <li>
                 <span>Discount:</span>
-                <span>{{discount | currency('¥')}}</span>
+                <span>{{discount | currency('$')}}</span>
               </li>
               <li>
                 <span>Tax:</span>
-                <span>{{tax | currency('¥')}}</span>
+                <span>{{tax | currency('$')}}</span>
               </li>
               <li class="order-total-price">
                 <span>Order total:</span>
-                <span>{{orderTotal | currency('¥')}}</span>
+                <span>{{orderTotal | currency('$')}}</span>
               </li>
             </ul>
           </div>
