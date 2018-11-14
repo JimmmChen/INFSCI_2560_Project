@@ -9,8 +9,8 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - "~/Desktop/INFSCI_2560_Project/mogodb/data/db:/data/db"
-      - "~/Desktop/INFSCI_2560_Project/mogodb/data/configdb:/data/configdb"
+      - "~/Desktop/INFSCI_2560_Project/mongodb/data/db:/data/db"
+      - "~/Desktop/INFSCI_2560_Project/mongodb/data/configdb:/data/configdb"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
