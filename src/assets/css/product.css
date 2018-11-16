@@ -294,14 +294,14 @@
   transform: rotate(180deg);
 }
 
-.filter .filter-price dd a:hover, .filter .filter-price dd .cur {
+.filter .filter-category dd a:hover, .filter .filter-category dd .cur {
   -webkit-transition: padding-left .3s ease-out;
   transition: padding-left .3s ease-out;
   border-left: 2px solid #ee7a23;
   padding-left: 15px;
 }
 
-.filter .filter-price dd .cur {
+.filter .filter-category dd .cur {
   font-weight: bold;
 }
 

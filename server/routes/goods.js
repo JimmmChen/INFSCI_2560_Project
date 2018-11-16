@@ -22,27 +22,19 @@ mongoose.connection.on('disconnected', () => {
 router.get('/list', (req, res, next) => {
     let page = parseInt(req.param('page'))
     let pageSize = parseInt(req.param('pageSize'))
-    let priceLevel = req.param("priceLevel")
+    let category = req.param("category")
     let sort = req.param('sort')
+    let sortAttr = req.param('sortAttribute')
     let skip = (page-1) * pageSize
-    let priceGt = '', priceLte = ''
     let params = {}
-    if (priceLevel != 'all') {
-        switch (priceLevel) {
-            case '0':priceGt = 0;priceLte=100;break;
-            case '1':priceGt = 100;priceLte=500;break;
-            case '2':priceGt = 500;priceLte=1000;break;
-            case '3':priceGt = 1000;priceLte=5000;break;
-        }
-        params = {
-            salePrice:{
-                $gt:priceGt,
-                $lte:priceLte
-            }
-        }
+    let sortObj = {}
+    sortObj[sortAttr] = sort
+    console.log(sortObj)
+    if (category != 'All') {
+        params = {'category' : category}
     }
     let goodsModel = Goods.find(params).skip(skip).limit(pageSize)
-    goodsModel.sort({'salePrice':sort})
+    goodsModel.sort(sortObj)
     goodsModel.exec((err,doc) => {
         if (err) {
             res.json({

@@ -8,18 +8,17 @@
         <div class="container">
           <div class="filter-nav">
             <span class="sortby">Sort by:</span>
-            <a href="javascript:void(0)" class="default cur">Default</a>
-            <a href="javascript:void(0)" class="price" v-bind:class="{'sort-up':sortFlag}" @click="sortGoods">Price <svg class="icon icon-arrow-short"><use xlink:href="#icon-arrow-short"></use></svg></a>
+            <a href="javascript:void(0)" :class="{'sort-up':sortFlag['publishDate'],'cur':sortAttribute === 'publishDate'}" @click="sortGoods('publishDate')">Date <svg class="icon icon-arrow-short"><use xlink:href="#icon-arrow-short"></use></svg></a>
+            <a href="javascript:void(0)" class="price" v-bind:class="{'sort-up':sortFlag['salePrice'],'cur':sortAttribute === 'salePrice'}" @click="sortGoods('salePrice')">Price <svg class="icon icon-arrow-short"><use xlink:href="#icon-arrow-short"></use></svg></a>
             <a href="javascript:void(0)" class="filterby stopPop" @click="showFilterPop">Filter by</a>
           </div>
           <div class="accessory-result">
             <!-- filter -->
             <div class="filter stopPop" id="filter" :class="{'filterby-show':filterBy}">
-              <dl class="filter-price">
-                <dt>Price:</dt>
-                <dd><a href="javascript:void(0)" :class="{'cur':priceChecked=='all'}" @click="setPriceFilter('all')">All</a></dd>
-                <dd v-for="(price,index) in priceFilter" :key="price.startPrice" @click="setPriceFilter(index)">
-                  <a href="javascript:void(0)" :class="{'cur':priceChecked==index}">{{price.startPrice}} - {{price.endPrice}}</a>
+              <dl class="filter-category">
+                <dt>Category:</dt>
+                <dd v-for="(category,index) in categoryFilter" :key="category" @click="setCategoryFilter(index)">
+                  <a href="javascript:void(0)" :class="{'cur':categoryChecked==index}">{{category}}</a>
                 </dd>
               </dl>
             </div>
@@ -87,29 +86,17 @@ export default{
   data () {
     return {
       goodsList: [],
-      sortFlag: true,
+      sortFlag: {
+        'publishDate': true,
+        'salePrice': true
+      },
+      sortAttribute: 'salePrice',
       page: 1,
       pageSize: 8,
       mdShow: false,
       mdShowCart: false,
-      priceFilter: [
-        {
-          startPrice: '0',
-          endPrice: '100'
-        },
-        {
-          startPrice: '100',
-          endPrice: '500'
-        },
-        {
-          startPrice: '500',
-          endPrice: '1000'
-        },
-        {
-          startPrice: '1000',
-          endPrice: '5000'
-        }],
-      priceChecked: 'all',
+      categoryFilter: ['All', 'Literature&Fiction', 'History', 'Business&Money', 'Computers&Technology', 'LGBT', 'Health,Fitness&Dieting', 'Sexual Health'],
+      categoryChecked: 0,
       filterBy: false,
       overLayFlag: false
     }
@@ -132,8 +119,9 @@ export default{
       let param = {
         page: this.page,
         pageSize: this.pageSize,
-        sort: this.sortFlag === true ? 1 : -1,
-        priceLevel: this.priceChecked
+        sort: this.sortFlag[this.sortAttribute] === true ? 1 : -1,
+        sortAttribute: this.sortAttribute,
+        category: this.categoryFilter[this.categoryChecked]
       }
       axios.get('/goods/list', {
         params: param
@@ -158,8 +146,9 @@ export default{
         }
       })
     },
-    sortGoods () {
-      this.sortFlag = !this.sortFlag
+    sortGoods (attribute) {
+      this.sortAttribute = attribute
+      this.sortFlag[attribute] = !this.sortFlag[attribute]
       this.reset()
       this.getGoodsList()
     },
@@ -177,8 +166,8 @@ export default{
       this.filterBy = false
       this.overLayFlag = false
     },
-    setPriceFilter (index) {
-      this.priceChecked = index
+    setCategoryFilter (index) {
+      this.categoryChecked = index
       this.reset()
       this.getGoodsList()
       this.closePop()
