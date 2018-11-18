@@ -63,7 +63,7 @@
                   <li v-for="(item,index) in addressListFilter" :key="item.addressId" :class="{'check':checkedIndex===index}" @click="checkedIndex=index;selectedAddressId=item.addressId">
                     <dl>
                       <dt>{{item.userName}}</dt>
-                      <dd class="address">{{item.streetName}}</dd>
+                      <dd class="address">{{item.streetName}}, {{item.city}}, {{item.state}} {{item.postCode}}</dd>
                       <dd class="tel">{{item.tel}}</dd>
                     </dl>
                     <div class="addr-opration addr-del">
@@ -76,7 +76,7 @@
                     </div>
                     <div class="addr-opration addr-default" v-else>Default address</div>
                   </li>
-                  <li class="addr-new">
+                  <li class="addr-new" @click="addAddress">
                     <div class="add-new-inner">
                       <i class="icon-add">
                         <svg class="icon icon-add"><use xlink:href="#icon-add"></use></svg>
@@ -89,8 +89,8 @@
 
               <div class="shipping-addr-more">
                 <a class="addr-more-btn up-down-btn" href="javascript:;" @click="expand" :class="{'open':limit>3}">
-                  <span v-if="limit===3">more</span>
-                  <span v-else>less</span>
+                  <span v-if="limit===3">More</span>
+                  <span v-else>Less</span>
                   <i class="i-up-down">
                     <i class="i-up-down-l"></i>
                     <i class="i-up-down-r"></i>
@@ -131,6 +131,41 @@
           <a class="btn btn--m" href="javascript:;" @click="modalConfirm = false">Close</a>
         </div>
       </modal>
+      <modal :mdShow="modalNewAdd" @close="modalNewAdd = false">
+        <div slot="message">
+          <ul>
+            <li class="regi_form_input">
+              <i class="form_key_name">Full Name:</i>
+              <input type="text" tabindex="1" name="userName" v-model="userName" class="regi_new_address_input regi_login_input_left">
+            </li>
+            <li class="regi_form_input">
+              <i class="form_key_name">Stress:</i>
+              <input type="text" tabindex="1" name="streetName" v-model="streetName" class="regi_new_address_input regi_login_input_left">
+            </li>
+            <li class="regi_form_input">
+              <i class="form_key_name">Post Code:</i>
+              <input type="text" tabindex="1" name="postCode" v-model="postCode" class="regi_new_address_input regi_login_input_left">
+            </li>
+            <li class="regi_form_input">
+              <i class="form_key_name">City:</i>
+              <input type="text" tabindex="1" name="city" v-model="city" class="regi_new_address_input regi_login_input_left">
+            </li>
+            <li class="regi_form_input">
+              <i class="form_key_name">State:</i>
+              <input type="text" tabindex="1" name="state" v-model="state" class="regi_new_address_input regi_login_input_left">
+            </li>
+            <li class="regi_form_input">
+              <i class="form_key_name">Tel:</i>
+              <input type="text" tabindex="1" name="tel" v-model="tel" class="regi_new_address_input regi_login_input_left">
+            </li>
+          </ul>
+        </div>
+        <div slot="btnGroup">
+          <div class="login-wrap">
+            <a href="javascript:;" class="btn-login" @click="addAddressSubmit">Submit</a>
+          </div>
+        </div>
+      </modal>
       <nav-footer></nav-footer>
     </div>
 </template>
@@ -150,8 +185,15 @@ export default{
       addressList: [],
       checkedIndex: 0,
       modalConfirm: false,
+      modalNewAdd: false,
       delAddressId: '',
-      selectedAddressId: ''
+      selectedAddressId: '',
+      userName: '',
+      streetName: '',
+      postCode: '',
+      city: '',
+      state: '',
+      tel: ''
     }
   },
   components: {
@@ -171,6 +213,9 @@ export default{
         let res = response.data
         if (res.status === '0') {
           this.addressList = res.result
+          if (this.limit > 3) {
+            this.limit = this.addressList.length
+          }
         }
         this.addressList.forEach((item, index) => {
           if (item.isDefault) {
@@ -207,6 +252,39 @@ export default{
         if (res.status === '0') {
           this.init()
           this.modalConfirm = false
+        }
+      })
+    },
+    addAddress () {
+      axios.post('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAU06vmFXQjLb1S7JUqGIizv1L9vLeabuc').then((response) => {
+        let res = response.data
+        let lat = res.location.lat
+        let lng = res.location.lng
+        let placeReqUrl = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&key=AIzaSyAU06vmFXQjLb1S7JUqGIizv1L9vLeabuc'
+        axios.get(placeReqUrl).then((placeResponse) => {
+          let placeRes = placeResponse.data
+          let formattedAddress = placeRes.results[0].formatted_address.split(', ')
+          this.streetName = formattedAddress[0]
+          this.city = formattedAddress[1]
+          this.state = formattedAddress[2].split(' ')[0]
+          this.postCode = formattedAddress[2].split(' ')[1]
+          this.modalNewAdd = true
+        })
+      })
+    },
+    addAddressSubmit () {
+      axios.put('/users/address', {
+        userName: this.userName,
+        streetName: this.streetName,
+        postCode: this.postCode,
+        city: this.city,
+        state: this.state,
+        tel: this.tel
+      }).then((response) => {
+        let res = response.data
+        if (res.status === '0') {
+          this.init()
+          this.modalNewAdd = false
         }
       })
     }

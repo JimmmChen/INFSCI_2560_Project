@@ -138,6 +138,10 @@
 }
 
 @media only screen and (max-width: 767px) {
+  .accessory-result .accessory-list-wrap {
+    width: 100%;
+  }
+
   .accessory-list {
     font-size: 1.2rem;
   }

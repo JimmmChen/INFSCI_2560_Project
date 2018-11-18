@@ -198,7 +198,7 @@ export default{
       let sum = 0
       this.cartList.forEach((item) => {
         if (item.checked === '1') {
-          sum += parseFloat(item.productNum) * parseInt(item.salePrice)
+          sum += parseInt(item.productNum) * parseFloat(item.salePrice)
         }
       })
       return sum

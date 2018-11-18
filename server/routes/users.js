@@ -296,6 +296,55 @@ router.delete('/address', (req, res, next) => {
     })
 })
 
+//add address
+router.put('/address', (req, res, next) => {
+  let userId = req.cookies.userId
+  let userName = req.body.userName
+  let streetName = req.body.streetName
+  let postCode = req.body.postCode
+  let city = req.body.city
+  let state = req.body.state
+  let tel = req.body.tel
+  let currentDate = new Date()
+  let address = {
+    addressId: currentDate.valueOf(),
+    userName: userName,
+    streetName: streetName,
+    postCode: postCode,
+    city: city,
+    state: state,
+    tel: tel,
+    isDefault: false
+  }
+  User.findOne({userId:userId}, (err, user) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: err.message,
+        result: ''
+      })
+    } else {
+      user.addressList.push(address)
+      user.save((err1,doc) => {
+        if (err1) {
+          res.json({
+            status: '1',
+            msg: err.message,
+            result: ''
+          })
+        } else {
+          res.json({
+            status: '0',
+            msg: '',
+            result: 'add address successed!'
+          })
+        }
+      })
+    }
+  })
+})
+
+//create a order
 router.put('/payment', (req, res, next) => {
   let userId = req.cookies.userId
   let orderTotal = req.body.orderTotal
@@ -334,7 +383,7 @@ router.put('/payment', (req, res, next) => {
       let sysDate = new Date().Format('yyyyMMddhhmmss')
       let createDate = new Date().Format('yyyy-MM-dd hh:mm:ss')
       let orderId = platform + random1 + sysDate + random2
-      let order ={
+      let order = {
         orderId: orderId,
         orderTotal: orderTotal,
         addressInfo: address,

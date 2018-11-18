@@ -95,7 +95,7 @@ export default{
       pageSize: 8,
       mdShow: false,
       mdShowCart: false,
-      categoryFilter: ['All', 'Literature&Fiction', 'History', 'Business&Money', 'Computers&Technology', 'LGBT', 'Health,Fitness&Dieting', 'Sexual Health'],
+      categoryFilter: ['All', 'Literature&Fiction', 'History', 'Business&Money', 'Computers&Technology', 'LGBT', 'Health,Fitness&Dieting', 'Sexual Health', 'Humor&Entertainment', 'Cookbooks,Food&Wine'],
       categoryChecked: 0,
       filterBy: false,
       overLayFlag: false

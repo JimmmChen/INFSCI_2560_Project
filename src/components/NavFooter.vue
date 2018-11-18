@@ -5,13 +5,13 @@
         <div class="footer__inner">
           <div class="footer__secondary__nav">
             <span>Copyright © 2018</span>
-            <a href="http://us.lemall.com/us/aboutUs.html">
+            <a href="#">
               About Us
             </a>
-            <a href="http://us.lemall.com/us/termsofUse.html">
+            <a href="#">
               Terms &amp; Conditions
             </a>
-            <a href="http://us.lemall.com/us/privacyPolicy.html">
+            <a href="#">
               Privacy Policy
             </a>
           </div>

@@ -90,7 +90,7 @@
         </div>
         <div class="order-foot-wrap">
           <div class="prev-btn-wrap">
-            <a class="btn btn--m">Previous</a>
+            <router-link class="btn btn--m" href="javascript:;" to="/address">Previous</router-link>
           </div>
           <div class="next-btn-wrap">
             <button class="btn btn--m btn--red" @click="payment">Proceed to payment</button>
@@ -132,7 +132,7 @@ export default{
           res.result.forEach((item) => {
             if (item.checked === '1') {
               this.cartList.push(item)
-              subTotal += item.salePrice * item.productNum
+              subTotal += parseFloat(item.salePrice) * item.productNum
             }
           })
           this.subTotal = subTotal
