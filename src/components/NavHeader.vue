@@ -23,7 +23,6 @@
       </div>
       <div class="navbar-right-container" style="display: flex;">
         <div class="navbar-menu-container">
-          <!--<a href="/" class="navbar-link">我的账户</a>-->
           <span class="navbar-link" v-text="nickName" v-if="nickName"></span>
           <a href="javascript:void(0)" class="navbar-link" @click="loginModalFlag=true" v-if="!nickName">Login</a>
           <a href="javascript:void(0)" class="navbar-link" @click="logOut" v-else>Logout</a>

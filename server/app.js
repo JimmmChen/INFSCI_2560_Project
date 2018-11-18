@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var goodsRouter = require('./routes/goods')
-
+var adminRouter = require('./routes/admin')
 var app = express();
 
 // view engine setup
@@ -20,12 +20,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//rules for user
 app.use((req, res, next) => {
-  if (req.cookies.userId) {
-    next();
-  } else {
-    if (req.originalUrl === '/users/login' || req.originalUrl === '/users/logout' || req.path == '/goods/list') {
-      next();
+  if (req.originalUrl.startsWith('/users') || req.originalUrl.startsWith('/goods')) {
+    if (req.cookies.userId) {
+      next()
+    } else if (req.originalUrl === '/users/login' || req.originalUrl === '/users/logout' || req.path == '/goods/list') {
+      next()
     } else {
       res.json({
         status: '10001',
@@ -33,12 +34,32 @@ app.use((req, res, next) => {
         result: ''
       })
     }
+  } else {
+    next()
   }
 })
+
+//rules for admin function
+// app.use((req, res, next) => {
+//   if (req.originalUrl.startsWith('/admin')){
+//     if (req.cookies.adminId || req.originalUrl === '/admin/login') {
+//       next()
+//     } else {
+//       res.json({
+//         status: '10001',
+//         msg: 'Not login yet',
+//         result: ''
+//       })
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/goods', goodsRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
