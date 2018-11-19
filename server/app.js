@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var goodsRouter = require('./routes/goods')
 var adminRouter = require('./routes/admin')
@@ -40,23 +39,22 @@ app.use((req, res, next) => {
 })
 
 //rules for admin function
-// app.use((req, res, next) => {
-//   if (req.originalUrl.startsWith('/admin')){
-//     if (req.cookies.adminId || req.originalUrl === '/admin/login') {
-//       next()
-//     } else {
-//       res.json({
-//         status: '10001',
-//         msg: 'Not login yet',
-//         result: ''
-//       })
-//     }
-//   } else {
-//     next()
-//   }
-// })
+app.use((req, res, next) => {
+  if (req.originalUrl.startsWith('/admin')){
+    if (req.cookies.adminId || req.originalUrl === '/admin/login') {
+      next()
+    } else {
+      res.json({
+        status: '10001',
+        msg: 'Not login yet',
+        result: ''
+      })
+    }
+  } else {
+    next()
+  }
+})
 
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/goods', goodsRouter);
 app.use('/admin', adminRouter);

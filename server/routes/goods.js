@@ -20,16 +20,16 @@ mongoose.connection.on('disconnected', () => {
 
 //get goods list
 router.get('/list', (req, res, next) => {
-    let page = parseInt(req.param('page'))
-    let pageSize = parseInt(req.param('pageSize'))
-    let category = req.param("category")
-    let sort = req.param('sort')
-    let sortAttr = req.param('sortAttribute')
+    let query = req.query
+    let page = parseInt(query.page)
+    let pageSize = parseInt(query.pageSize)
+    let category = query.category
+    let sort = query.sort
+    let sortAttr = query.sortAttribute
     let skip = (page-1) * pageSize
     let params = {}
     let sortObj = {}
     sortObj[sortAttr] = sort
-    console.log(sortObj)
     if (category != 'All') {
         params = {'category' : category}
     }

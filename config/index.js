@@ -6,7 +6,6 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
@@ -15,6 +14,9 @@ module.exports = {
         target: 'http://localhost:3000'
       },
       '/users': {
+        target: 'http://localhost:3000'
+      },
+      '/admin': {
         target: 'http://localhost:3000'
       }
     },

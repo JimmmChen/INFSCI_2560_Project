@@ -90,6 +90,7 @@ export default {
         if (res.status === '0') {
           this.$store.commit('updateUserInfo', res.result)
           this.getCartCount()
+          sessionStorage.setItem('isLogin', true)
         }
       })
     },
@@ -108,6 +109,10 @@ export default {
           this.loginModalFlag = false
           this.$store.commit('updateUserInfo', res.result.userName)
           this.getCartCount()
+          sessionStorage.setItem('isLogin', true)
+          this.$router.push({
+            path: '/'
+          })
         } else {
           this.errorTip = true
         }
@@ -119,6 +124,10 @@ export default {
         if (res.status === '0') {
           this.$store.commit('updateUserInfo', '')
           this.$store.commit('initCartCount', 0)
+          sessionStorage.removeItem('isLogin')
+          this.$router.push({
+            path: '/'
+          })
         }
       })
     },
