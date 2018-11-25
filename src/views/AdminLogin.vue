@@ -36,9 +36,8 @@ export default {
       }).then((response) => {
         let res = response.data
         if (res.status === '0') {
-          sessionStorage.setItem('isAdmin', true)
           this.$router.push({
-            path: '/AdminDashboard'
+            path: '/manageDashboard'
           })
         } else {
           this.errorTip = true
@@ -50,6 +49,10 @@ export default {
 </script>
 
 <style scoped>
-@import "../../assets/css/bootstrap.min.css";
-@import "../../assets/css/signin.css";
+@import "../assets/css/bootstrap.min.css";
+@import "../assets/css/signin.css";
+
+.text-center {
+  margin-top: 10%
+}
 </style>

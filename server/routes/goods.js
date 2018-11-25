@@ -1,10 +1,10 @@
-let express = require('express');
-let router = express.Router();
-let mongoose = require('mongoose');
-let Goods = require('../models/good');
+let express = require('express')
+let router = express.Router()
+let mongoose = require('mongoose')
+let Goods = require('../models/good')
 
 //Connect to MongoDB
-mongoose.connect('mongodb://jim:100103@localhost:27017/bookmall');
+mongoose.connect('mongodb://jim:100103@localhost:27017/bookmall')
 
 mongoose.connection.on('connected', () => {
     console.log('MongoDB connected success')

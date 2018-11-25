@@ -23,7 +23,7 @@
       </div>
       <div class="navbar-right-container" style="display: flex;">
         <div class="navbar-menu-container">
-          <span class="navbar-link" v-text="nickName" v-if="nickName"></span>
+          <span class="navbar-link" v-text="'Hi, ' + nickName" v-if="nickName"></span>
           <a href="javascript:void(0)" class="navbar-link" @click="loginModalFlag=true" v-if="!nickName">Login</a>
           <a href="javascript:void(0)" class="navbar-link" @click="logOut" v-else>Logout</a>
           <div class="navbar-cart-container">
@@ -63,7 +63,6 @@
 </template>
 
 <script>
-import '../assets/css/login.css'
 import Modal from './Modal'
 import axios from 'axios'
 import { mapState } from 'vuex'
@@ -145,3 +144,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@import '../assets/css/login.css';
+</style>

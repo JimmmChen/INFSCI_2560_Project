@@ -388,7 +388,7 @@ router.put('/payment', (req, res, next) => {
         orderTotal: orderTotal,
         addressInfo: address,
         goodsList: goodsList,
-        orderStatus: '1',
+        orderStatus: 'Paid',
         createDate: createDate
       }
       user.orderList.push(order)

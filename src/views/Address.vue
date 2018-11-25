@@ -170,6 +170,7 @@
     </div>
 </template>
 <style>
+@import '../assets/css/login.css';
 </style>
 <script>
 import NavHeader from '@/components/NavHeader'

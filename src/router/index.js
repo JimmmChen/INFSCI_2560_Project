@@ -5,8 +5,10 @@ import Cart from './../views/Cart'
 import Address from './../views/Address'
 import OrderConfirm from './../views/OrderConfirm'
 import OrderSuccess from './../views/OrderSuccess'
-
-import AdminLogin from './../views/admin/login'
+import AdminLogin from './../views/AdminLogin'
+import AdminDashboard from './../views/AdminDashboard'
+import AdminBook from './../views/AdminBook'
+import AdminOrder from './../views/AdminOrder'
 
 Vue.use(Router)
 
@@ -77,12 +79,54 @@ const router = new Router({
       }
     },
     {
-      path: '/AdminLogin',
+      path: '/managerLogin',
       component: AdminLogin,
       beforeEnter: (to, from, next) => {
-        if (sessionStorage.getItem('isAdmin')) {
+        if (window.$cookies.get('adminId')) {
           router.push({
-            path: '/AdminDashboard'
+            path: '/manageDashboard'
+          })
+        } else {
+          next()
+        }
+      }
+    },
+    {
+      path: '/manageDashboard',
+      component: AdminDashboard,
+      beforeEnter: (to, from, next) => {
+        if (!window.$cookies.get('adminId')) {
+          alert('Need for Login')
+          router.push({
+            path: '/managerLogin'
+          })
+        } else {
+          next()
+        }
+      }
+    },
+    {
+      path: '/manageBook',
+      component: AdminBook,
+      beforeEnter: (to, from, next) => {
+        if (!window.$cookies.get('adminId')) {
+          alert('Need for Login')
+          router.push({
+            path: '/managerLogin'
+          })
+        } else {
+          next()
+        }
+      }
+    },
+    {
+      path: '/manageOrder',
+      component: AdminOrder,
+      beforeEnter: (to, from, next) => {
+        if (!window.$cookies.get('adminId')) {
+          alert('Need for Login')
+          router.push({
+            path: '/managerLogin'
           })
         } else {
           next()

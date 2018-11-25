@@ -1,7 +1,6 @@
 var mongoose = require('mongoose')
-var Schema = mongoose.Schema;
 
-var adminSchema = new Schema({
+var adminSchema = new mongoose.Schema({
     "adminId": String,
     "adminName": String,
     "adminPwd": String

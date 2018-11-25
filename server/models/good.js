@@ -10,6 +10,7 @@ var produtSchema = new Schema({
   "productImage":String,
   "publishDate": Number,
   "category":String,
+  "productUrl": String
 });
 
 module.exports = mongoose.model('Good',produtSchema);

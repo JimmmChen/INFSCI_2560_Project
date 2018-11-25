@@ -6,6 +6,10 @@ import router from './router/index'
 import Vuex from 'vuex'
 import VueLazyLoad from 'vue-lazyload'
 import {currency} from './util/currency'
+import VueFeather from 'vue-feather'
+import feather from 'feather-icons'
+import VueCookies from 'vue-cookies'
+import VueCharts from 'vue-charts'
 
 import './assets/css/base.css'
 import './assets/css/product.css'
@@ -17,6 +21,9 @@ Vue.use(VueLazyLoad, {
   loading: '/static/loading-svg/loading-bars.svg'
 })
 Vue.filter('currency', currency)
+Vue.component(VueFeather.name, VueFeather, feather)
+Vue.use(VueCookies)
+Vue.use(VueCharts)
 
 const store = new Vuex.Store({
   state: {
