@@ -40,6 +40,7 @@ export default{
       axios.post('/admin/logout').then((response) => {
         let res = response.data
         if (res.status === '0') {
+          sessionStorage.setItem('onceLogout', true)
           this.$router.push({
             path: '/managerLogin'
           })

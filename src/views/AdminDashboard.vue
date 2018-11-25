@@ -95,6 +95,10 @@ export default{
     }
   },
   mounted () {
+    if (sessionStorage.getItem('onceLogout')) {
+      sessionStorage.removeItem('onceLogout')
+      this.$router.go(0)
+    }
     this.init()
   }
 }
