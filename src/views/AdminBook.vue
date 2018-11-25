@@ -117,6 +117,7 @@ select{
   -moz-transition: all 0.30s ease-in-out;
   -ms-transition: all 0.30s ease-in-out;
   -o-transition: all 0.30s ease-in-out;
+  transition: all 0.30s ease-in-out;
   outline: none;
   }
 .form-style-1 input[type=text]:focus,
