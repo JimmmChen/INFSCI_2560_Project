@@ -34,7 +34,7 @@ router.post('/login', (req, res, next) => {
               adminName: doc.adminName
             }
           })
-        } else { 
+        } else {
             res.json({
             status: '1',
             msg: 'Admin name or password mismatch',
@@ -86,17 +86,13 @@ router.post('/book',upload.single('cover'), (req,res,next) => {
   console.log(book)
   Good.insertMany(book, (error, docs) => {
     if (docs) {
-      res.json({
-        status: '0',
-        msg: '',
-        result: 'Create a book success!'
-      })
+      res.redirect('http://localhost:8080/manageBook')
     } else {
       res.json({
         status: '1',
         msg: error.message,
         result: ''
-      })      
+      })
     }
   })
 })
@@ -112,7 +108,7 @@ router.get('/order', (req,res,next) => {
       status: '0',
       msg: '',
       result: orders
-    })     
+    })
   })
 })
 

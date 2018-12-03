@@ -39,16 +39,16 @@ export default{
         'label': 'Book'
       }, {
         'type': 'number',
-        'label': 'Sales'
+        'label': 'Sales / 10'
       }, {
         'type': 'number',
-        'label': 'Count * 10'
+        'label': 'Count'
       }],
       options: {
         title: 'Sales Summary Per Book',
         height: 800,
         vAxis: {textStyle: {fontSize: '12', paddingRight: '100', marginRight: '150'}},
-        chartArea: {left: 300, width: 700},
+        chartArea: {left: 300, width: 600},
         bar: {
           groupWidth: '90%'
         }

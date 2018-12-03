@@ -21,7 +21,7 @@
             <h3>Congratulations! <br>Your order is under processing!</h3>
             <p>
               <span>Order ID：{{orderId}}</span>
-              <span>Order total：{{orderTotal | currency('¥')}}</span>
+              <span>Order total：{{orderTotal | currency('$')}}</span>
             </p>
             <div class="order-create-btn-wrap">
               <div class="btn-l-wrap">

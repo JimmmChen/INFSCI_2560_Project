@@ -37,7 +37,7 @@
                         <option value="History">History</option>
                         <option value="Business&Money">Business&amp;Money</option>
                         <option value="Computers&Technology">Computers&amp;Technology</option>
-                        <option value="LGBT">LGBT</option>
+                        <option value="Philosophy">Philosophy</option>
                         <option value="Health,Fitness&Dieting">Health,Fitness&amp;Dieting</option>
                         <option value="Sexual Health">Sexual Health</option>
                         <option value="Humor&Entertainment">Humor&amp;Entertainment</option>
@@ -49,7 +49,7 @@
                         <input type="file" accept="image/png, image/jpeg" name="cover" required="required" class="field-long"/>
                     </li>
                     <li>
-                        <input type="submit" value="Add a Book" />
+                        <input type="submit" />
                     </li>
                 </ul>
               </form>
